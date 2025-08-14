@@ -1,0 +1,16 @@
+
+version: '3.8'
+services:
+  kali-osint:
+    image: kali-osint-stack
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"  # SpiderFoot Web UI
+    volumes:
+      - ./osint_data:/opt/osint_data
+    environment:
+      - USERNAME=<font color='red'>[USERNAME]</font>
+      - HIBP_API_KEY=<font color='red'>[YOUR_API_KEY]</font>
+    command: /opt/osint_workflow.sh

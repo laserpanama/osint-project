@@ -1,0 +1,36 @@
+
+FROM kali:latest
+
+# Install base tools
+RUN apt update && apt install -y \
+    python3 python3-pip git tor exiftool firefox-esr curl \
+    libx11-xcb1 libnss3 xvfb xdg-utils recon-ng adb \
+    chromium chromium-driver
+
+# Install Python dependencies
+RUN pip3 install twint selenium
+
+# Install Sherlock
+RUN git clone https://github.com/sherlock-project/sherlock.git /opt/sherlock && \
+    pip3 install -r /opt/sherlock/requirements.txt
+
+# Install Maigret
+RUN git clone https://github.com/soxoj/maigret.git /opt/maigret && \
+    pip3 install -r /opt/maigret/requirements.txt
+
+# Install SpiderFoot
+RUN git clone https://github.com/smicallef/spiderfoot.git /opt/spiderfoot && \
+    pip3 install -r /opt/spiderfoot/requirements.txt
+
+# Copy workflow and scraper scripts
+COPY osint_workflow.sh /opt/osint_workflow.sh
+COPY whatsapp_scraper.py /opt/whatsapp_scraper.py
+COPY linkedin_scraper.py /opt/linkedin_scraper.py
+COPY device_log_extractor.py /opt/device_log_extractor.py
+RUN chmod +x /opt/osint_workflow.sh /opt/whatsapp_scraper.py /opt/linkedin_scraper.py /opt/device_log_extractor.py
+
+# Setup Working Directory
+WORKDIR /opt
+
+# Default entrypoint
+CMD ["/opt/osint_workflow.sh"]
