@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  osint-stack:
+    build: .
+    container_name: osint-stack
+    tty: true
+    stdin_open: true
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./output:/opt/output
