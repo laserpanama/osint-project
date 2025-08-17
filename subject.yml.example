@@ -1,0 +1,51 @@
+# --- OSINT Investigation Subject File ---
+#
+# This file defines the target and the tools to be used for the investigation.
+# 1. Fill in the 'subject_data' section with any information you have about the target.
+#    You can leave fields blank or remove them if they are not relevant.
+# 2. In the 'tool_config' section, set a tool to 'true' to enable it or 'false' to disable it.
+# 3. Rename this file to 'subject.yml' before running the investigation.
+#
+
+# --- Section 1: Subject Data ---
+# Enter all known information about the target here. The script will use this
+# data to run the relevant scans.
+subject_data:
+  # The full name of the subject. (Currently for documentation purposes)
+  full_name: "Yahaira Arosemena"
+
+  # A list of known usernames to search for across social media.
+  usernames:
+    - "yaharose" # Example username
+    - "yaros"   # Another example
+
+  # A list of email addresses. (Future tools could use this for leak checking)
+  emails:
+    - "yahaira.arosemena@example.com"
+
+  # A list of phone numbers.
+  phone_numbers:
+    - "+50769674636"
+
+  # A list of domains associated with the subject.
+  domains:
+    - "yahaira-arosemena-blog.com"
+
+# --- Section 2: Tool Configuration ---
+# Enable or disable specific tools for this investigation.
+tool_config:
+  # Sherlock: Fast username enumeration across many sites.
+  sherlock: true
+
+  # Maigret: Slower, but more detailed username analysis.
+  maigret: true
+
+  # SpiderFoot: This tool runs as a web service for broad, automated footprinting.
+  # Access the UI at http://localhost:5001 to run scans manually.
+  # This setting is a reminder and does not trigger an automated scan.
+  spiderfoot_manual_scan_reminder: true
+
+  # Exiftool: Extracts metadata from media files.
+  # For this to work, you must place any media files inside the generated
+  # output directory in a subfolder named 'media_for_analysis'.
+  exiftool: true
